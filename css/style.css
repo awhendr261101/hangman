@@ -77,3 +77,11 @@ button#restartBtn:hover {
 button.hidden {
     display: none;
 }
+
+.cont{
+    text-align: center;
+
+    p {
+        margin: 0 !important;
+    }
+}

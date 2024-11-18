@@ -1,21 +1,37 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const wordList = ['javascript', 'developer', 'hangman', 'challenge', 'function', 'variable'];
+    const categories = {
+        teams: ['liverpool', 'chelsea', 'arsenal'],
+        food: ['pasta', 'burger', 'pizza'],
+        places: ['mexico', 'china', 'usa', 'canada', ''],
+        movies: ['taken', 'flash', 'titanic'],
+        dev: ['javascript', 'developer', 'hangman', 'challenge', 'function', 'variable']
+    };
+    
+    let categoryChosen = '';
     let chosenWord = '';
     let displayedWord = '';
-    let chancesLeft = 20;
+    let chancesLeft = 0;
+
     const wordDisplay = document.getElementById('wordDisplay');
     const messageDisplay = document.getElementById('message');
     const lettersContainer = document.getElementById('lettersContainer');
     const chancesLeftDisplay = document.getElementById('chancesLeft');
     const restartBtn = document.getElementById('restartBtn');
+    const categoryDisplay = document.getElementById('category'); 
 
     function startGame() {
+        const categoryKeys = Object.keys(categories);
+        categoryChosen = categoryKeys[Math.floor(Math.random() * categoryKeys.length)];
+        
+        const wordList = categories[categoryChosen];
         chosenWord = wordList[Math.floor(Math.random() * wordList.length)];
+        
         displayedWord = '_'.repeat(chosenWord.length);
-        chancesLeft = 20;
+        chancesLeft = chosenWord.length + 2;
         updateDisplay();
 
-        // Generate alphabet buttons
+        categoryDisplay.textContent = categoryChosen.charAt(0).toUpperCase() + categoryChosen.slice(1);
+
         lettersContainer.innerHTML = '';
         for (let i = 65; i <= 90; i++) {
             const letter = String.fromCharCode(i);
@@ -26,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
             lettersContainer.appendChild(button);
         }
 
-        messageDisplay.textContent = '';
         restartBtn.classList.add('hidden');
     }
 
@@ -77,6 +92,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     restartBtn.addEventListener('click', startGame);
 
-    // Start the game when the page loads
     startGame();
 });
