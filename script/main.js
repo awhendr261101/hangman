@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const categoryDisplay = document.getElementById('category'); 
 
     function startGame() {
+        messageDisplay.innerText = '';
         const categoryKeys = Object.keys(categories);
         categoryChosen = categoryKeys[Math.floor(Math.random() * categoryKeys.length)];
         
@@ -27,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         chosenWord = wordList[Math.floor(Math.random() * wordList.length)];
         
         displayedWord = '_'.repeat(chosenWord.length);
-        chancesLeft = chosenWord.length + 2;
+        chancesLeft = chosenWord.length;
         updateDisplay();
 
         categoryDisplay.textContent = categoryChosen.charAt(0).toUpperCase() + categoryChosen.slice(1);
